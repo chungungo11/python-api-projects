@@ -35,7 +35,7 @@ def get_user_input():
         call_endpoint(request)
 
 def validate_user_input(user_input):
-    if user_input in public_endpoints:
+    if user_input.lower() in public_endpoints:
         return True
     else:
         print("\nYour input was invalid. Please check for any typos and try again.")
@@ -71,7 +71,7 @@ def get_asset_info(endpoint):
         url = BASE_URL + endpoint
     else:
         url = f"{BASE_URL}{endpoint}?asset={asset}"
-        
+    # validate_response(url)
     get_response(url)
 
 def get_tradable_asset_pairs(endpoint):
@@ -92,6 +92,9 @@ def get_recent_trades(endpoint):
 def get_recent_spreads(endpoint):
     pass
 
+def validate_response(url):
+    pass
+
 def get_response(url):
     print("\nRequest url:" , url)
     response = requests.request("GET", url, headers=headers, data=payload)
@@ -107,11 +110,11 @@ def restart_prompt():
     restart = input("> ")
     if restart.lower() == "y":
         start_program()
-    elif restart.lower == "n":
+    elif restart.lower() == "n":
         exit(0)
-    # else:
-    #     print("\nYour input was invalid. Please type 'y' to restart or 'n' to exit.")
-    #     return restart_prompt()
+    else:
+        print("\nYour input was invalid. Please type 'y' to restart or 'n' to exit.")
+        return restart_prompt()
 
 if __name__ == "__main__":
     start_program()
