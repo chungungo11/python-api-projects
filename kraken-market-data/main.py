@@ -72,6 +72,7 @@ def get_asset_info(endpoint):
         url = BASE_URL + endpoint
     else:
         url = f"{BASE_URL}{endpoint}?asset={asset}"
+        
     # validate_response(url)
     get_response(url)
 
@@ -112,7 +113,17 @@ def get_tradable_asset_pairs(endpoint):
     get_response(url)
 
 def get_ticker_information(endpoint):
-    pass
+    print("\nOPTIONAL: Asset pair to get data for. Default: all tradeable exchange pairs.")
+    print("\nExample: 'XBTUSD'")
+    pair = input("> ")
+
+    if pair == "":
+        url = BASE_URL + endpoint
+    else:
+        url = f"{BASE_URL}{endpoint}?pair={pair}"
+
+    # validate_response(url)
+    get_response(url)
 
 def get_ohlc_data(endpoint):
     pass
