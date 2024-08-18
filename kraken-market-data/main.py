@@ -63,6 +63,7 @@ def call_endpoint(request):
 
 def get_asset_info(endpoint):
     print("\nOPTIONAL: Comma delimited list of assets to get info on. Default: all available assets.")
+    print("\nExample: 'BTC,ETH'")
     asset = input("> ")
     
     # print("OPTIONAL: Asset class. Default: 'currency'.")
@@ -75,7 +76,40 @@ def get_asset_info(endpoint):
     get_response(url)
 
 def get_tradable_asset_pairs(endpoint):
-    pass
+    print("\nOPTIONAL: Asset pair(s) to get data for. Default: all available assets.")
+    print("\nExample: 'BTC/USD,ETH/BTC'")
+    pair = input("> ")
+
+    print("\nOPTIONAL: Info to retrieve: 'info', 'leverage', 'fees', 'margin'. Default: 'info'.")
+    info = input("> ")
+
+    print("\nOPTIONAL: Filter for response to only include pairs available in provided countries/regions. Default: all countries/regions.")
+    print("\nExample: 'US:TX,GB,CA'")
+    country_code = input("> ")
+
+    # all query params are empty
+    if pair == "" and info == "" and country_code == "":
+        url = BASE_URL + endpoint
+    # pair
+    elif pair != "" and info == "" and country_code == "":
+        url = f"{BASE_URL}{endpoint}?pair={pair}"
+    # pair + info
+    elif pair != "" and info != "" and country_code == "":
+        url = f"{BASE_URL}{endpoint}?pair={pair}&info={info}"
+    # pair + country_code
+    elif pair != "" and info == "" and country_code != "":
+        url = f"{BASE_URL}{endpoint}?pair={pair}&country_code={country_code}"
+    # info
+    elif pair == "" and info != "" and country_code == "":
+        url = f"{BASE_URL}{endpoint}?info={info}"
+    # info + country_code
+    elif pair == "" and info != "" and country_code != "":
+        url = f"{BASE_URL}{endpoint}?info={info}&country_code={country_code}"
+    elif pair == "" and info == "" and country_code != "":
+        url = f"{BASE_URL}{endpoint}?country_code={country_code}"
+    
+    # validate_response(url)
+    get_response(url)
 
 def get_ticker_information(endpoint):
     pass
