@@ -47,7 +47,7 @@ def call_endpoint(request):
     if request == "get_server_time":
         get_server_time(endpoint)
     elif request == "get_system_status":
-        get_server_status(endpoint)
+        get_system_status(endpoint)
     elif request == "get_asset_info":
         get_asset_info(endpoint)
     elif request == "get_tradable_asset_pairs":
