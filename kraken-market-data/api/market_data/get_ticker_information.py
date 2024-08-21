@@ -6,7 +6,7 @@ def get_ticker_information(endpoint):
     print("- Today's prices start at midnight UTC")
     print("- Leaving the pair parameter blank will return tickers for all tradeable assets on Kraken")
     print("\nOPTIONAL: Asset pair to get data for. Default: all tradeable exchange pairs.")
-    print("EXAMPLE: 'XBTUSD'")
+    print("\nEXAMPLE: 'XBTUSD'")
     pair = input("> ")
 
     if pair == "":
@@ -14,5 +14,4 @@ def get_ticker_information(endpoint):
     else:
         url = f"{BASE_URL}{endpoint}?pair={pair}"
 
-    from main import get_response
-    get_response(url)
+    return url

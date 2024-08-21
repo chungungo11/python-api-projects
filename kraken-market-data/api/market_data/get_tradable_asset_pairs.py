@@ -4,14 +4,14 @@ from config import BASE_URL
 def get_tradable_asset_pairs(endpoint):
     print("\nINFO: Get tradable asset pairs.")
     print("\nOPTIONAL: Asset pair(s) to get data for. Default: all available assets.")
-    print("EXAMPLE: 'BTC/USD,ETH/BTC'")
+    print("\nEXAMPLE: 'BTC/USD,ETH/BTC'")
     pair = input("> ")
 
     print("\nOPTIONAL: Info to retrieve: 'info', 'leverage', 'fees', 'margin'. Default: 'info'.")
     info = input("> ")
 
     print("\nOPTIONAL: Filter for response to only include pairs available in provided countries/regions. Default: all countries/regions.")
-    print("EXAMPLE: 'US:TX,GB,CA'")
+    print("\nEXAMPLE: 'US:TX,GB,CA'")
     country_code = input("> ")
 
     # all query params are empty
@@ -35,5 +35,4 @@ def get_tradable_asset_pairs(endpoint):
     elif pair == "" and info == "" and country_code != "":
         url = f"{BASE_URL}{endpoint}?country_code={country_code}"
     
-    from main import get_response
-    get_response(url)
+    return url
