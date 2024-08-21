@@ -53,7 +53,6 @@ def get_endpoint_url(request):
 def get_response(url):
     print("\nRequest url:" , url)
     response = requests.request("GET", url, headers=headers, data=payload)
-    print(response.json())
     if response.json()["error"] == []:
         print_response(response)
         prompt_restart()

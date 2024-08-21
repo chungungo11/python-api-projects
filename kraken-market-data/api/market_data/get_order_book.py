@@ -7,14 +7,14 @@ def get_order_book(endpoint):
     print("\nEXAMPLE: 'XBTUSD'")
     pair = input("> ")
     if pair == "":
-        print("\nAsset pair is required! Please enter an asset pair.")
+        print("\nAsset pair is required. Please enter an asset pair.")
         get_order_book(endpoint)
 
     print("\nOPTIONAL: Maximum number of asks/bids. Default value: '100'.")
     print("\nPOSSIBLE VALUES: >= 1 and <= 500")
     count = input("> ")
     if int(count) not in range(1, 501):
-        print("\nValue is invalid! Please enter a valid interval.")
+        print("\nValue is invalid. Please enter a valid interval.")
         get_order_book(endpoint)
 
     # pair

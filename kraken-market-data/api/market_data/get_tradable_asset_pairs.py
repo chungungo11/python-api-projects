@@ -14,7 +14,7 @@ def get_tradable_asset_pairs(endpoint):
     print("\nEXAMPLE: 'US:TX,GB,CA'")
     country_code = input("> ")
 
-    # all query params are empty
+    # no query params
     if pair == "" and info == "" and country_code == "":
         url = BASE_URL + endpoint
     # pair
@@ -32,6 +32,7 @@ def get_tradable_asset_pairs(endpoint):
     # info + country_code
     elif pair == "" and info != "" and country_code != "":
         url = f"{BASE_URL}{endpoint}?info={info}&country_code={country_code}"
+    # country_code
     elif pair == "" and info == "" and country_code != "":
         url = f"{BASE_URL}{endpoint}?country_code={country_code}"
     

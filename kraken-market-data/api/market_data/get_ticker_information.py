@@ -9,8 +9,10 @@ def get_ticker_information(endpoint):
     print("\nEXAMPLE: 'XBTUSD'")
     pair = input("> ")
 
+    # no query param
     if pair == "":
         url = BASE_URL + endpoint
+    # pair
     else:
         url = f"{BASE_URL}{endpoint}?pair={pair}"
 

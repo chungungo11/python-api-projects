@@ -7,11 +7,21 @@ def get_asset_info(endpoint):
     print("\nEXAMPLE: 'BTC,ETH'")
     asset = input("> ")
     
-    # print("OPTIONAL: Asset class. Default: 'currency'.")
+    print("\nOPTIONAL: Asset class. Default: 'currency'.")
+    print("\nEXAMPLE: 'currency'")
+    aclass = input("> ")
 
-    if asset == "":
+    # no query params
+    if asset == "" and aclass == "":
         url = BASE_URL + endpoint
-    else:
+    # asset
+    elif asset != "" and aclass == "":
         url = f"{BASE_URL}{endpoint}?asset={asset}"
-
+    # aclass
+    elif asset == "" and aclass != "":
+        url = f"{BASE_URL}{endpoint}?aclass={aclass}"
+    # asset + aclass
+    elif asset != "" and aclass != "":
+        url = f"{BASE_URL}{endpoint}?asset={asset}&aclass={aclass}"
+    
     return url

@@ -7,7 +7,7 @@ def get_recent_trades(endpoint):
     print("\nEXAMPLE: 'XBTUSD'")
     pair = input("> ")
     if pair == "":
-        print("\nAsset pair is required! Please enter an asset pair.")
+        print("\nAsset pair is required. Please enter an asset pair.")
         get_recent_trades(endpoint)
 
     print("\nOPTIONAL: Return trade data since given timestamp.")
@@ -18,7 +18,7 @@ def get_recent_trades(endpoint):
     print("\nPOSSIBLE VALUES: >= 1 and <= 1000")
     count = input("> ")
     if int(count) not in range(1, 1001):
-        print("\nValue is invalid! Please enter a valid number of trades.")
+        print("\nValue is invalid. Please enter a valid number of trades.")
         get_recent_trades(endpoint)
 
     # pair

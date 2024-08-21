@@ -7,7 +7,7 @@ def get_ohlc_data(endpoint):
     print("\nEXAMPLE: 'XBTUSD'")
     pair = input("> ")
     if pair == "":
-        print("\nAsset pair is required! Please enter an asset pair.")
+        print("\nAsset pair is required. Please enter an asset pair.")
         get_ohlc_data(endpoint)
 
     interval_values = [1, 5, 15, 30, 60, 240, 1440, 10080, 21600]
@@ -15,7 +15,7 @@ def get_ohlc_data(endpoint):
     print("\nPOSSIBLE VALUES: [1, 5, 15, 30, 60, 240, 1440, 10080, 21600]")
     interval = input("> ")
     if int(interval) not in interval_values:
-        print("\nInterval value invalid! Please enter a valid interval.")
+        print("\nInterval value invalid. Please enter a valid interval.")
         get_ohlc_data(endpoint)
 
     print("\nOPTIONAL: Return up to 720 OHLC data points since given timestamp.")
