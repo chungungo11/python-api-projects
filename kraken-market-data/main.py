@@ -55,6 +55,7 @@ def get_response(url):
     response = requests.request("GET", url, headers=headers, data=payload)
     if response.json()["error"] == []:
         print_response(response)
+        prompt_save(response)
         prompt_restart()
     else:   
         print_response(response)
@@ -65,6 +66,20 @@ def get_response(url):
 def print_response(response):
     pretty_response = json.dumps(response.json(), indent=2)
     print(f"\n------------\n  Response  \n------------\n{pretty_response}")
+
+
+def prompt_save(response):
+    print("\nWould you like to save this response? (y/n)")
+    save = input("> ")
+    if save.lower() == "y":
+        with open('response.json', 'w') as outfile:
+            json.dump(response.json(), outfile, indent=2)
+        print('Data is saved to response.json')
+    elif save.lower() == "n":
+        return
+    else:
+        print("\nYour input was invalid. Please type 'y' to save or 'n' to skip.")
+        return prompt_save()
     
 
 def prompt_restart():
