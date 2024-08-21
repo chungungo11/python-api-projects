@@ -1,5 +1,5 @@
-from main import BASE_URL
-from main import get_response
+from config import BASE_URL
+
 
 def get_recent_spreads(endpoint):
     print("\nINFO: Returns the last ~200 top-of-book spreads for a given pair.")
@@ -21,4 +21,5 @@ def get_recent_spreads(endpoint):
     elif pair != "" and since != "":
         url = f"{BASE_URL}{endpoint}?pair={pair}&since={since}"
 
+    from main import get_response
     get_response(url)

@@ -1,5 +1,5 @@
-from main import BASE_URL
-from main import get_response
+from config import BASE_URL
+
 
 def get_tradable_asset_pairs(endpoint):
     print("\nINFO: Get tradable asset pairs.")
@@ -35,4 +35,5 @@ def get_tradable_asset_pairs(endpoint):
     elif pair == "" and info == "" and country_code != "":
         url = f"{BASE_URL}{endpoint}?country_code={country_code}"
     
+    from main import get_response
     get_response(url)

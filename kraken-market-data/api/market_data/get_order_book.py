@@ -1,5 +1,5 @@
-from main import BASE_URL
-from main import get_response
+from config import BASE_URL
+
 
 def get_order_book(endpoint):
     print("\nINFO: Returns the Order Book.")
@@ -24,4 +24,5 @@ def get_order_book(endpoint):
     elif pair != "" and count != "":
         url = f"{BASE_URL}{endpoint}?pair={pair}&count={count}"
 
+    from main import get_response
     get_response(url)

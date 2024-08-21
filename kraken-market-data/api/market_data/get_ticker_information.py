@@ -1,5 +1,5 @@
-from main import BASE_URL
-from main import get_response
+from config import BASE_URL
+
 
 def get_ticker_information(endpoint):
     print("\nGet ticker information for all or requested markets. To clarify usage, note that:")
@@ -14,4 +14,5 @@ def get_ticker_information(endpoint):
     else:
         url = f"{BASE_URL}{endpoint}?pair={pair}"
 
+    from main import get_response
     get_response(url)

@@ -1,5 +1,5 @@
-from main import BASE_URL
-from main import get_response
+from config import BASE_URL
+
 
 def get_recent_trades(endpoint):
     print("\nINFO: Returns the last 1000 trades by default.")
@@ -34,4 +34,5 @@ def get_recent_trades(endpoint):
     elif pair != "" and since != "" and count != "":
         url = f"{BASE_URL}{endpoint}?pair={pair}&since={since}&count={count}"
 
+    from main import get_response
     get_response(url)

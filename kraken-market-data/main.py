@@ -1,26 +1,8 @@
 import json
 import requests
 from api.market_data import *
+from config import *
 
-
-BASE_URL = "https://api.kraken.com/0"
-
-payload = {}
-headers = {
-  'Accept': 'application/json'
-}
-
-public_endpoints = {
-    "get_server_time": "/public/Time",
-    "get_system_status": "/public/SystemStatus",
-    "get_asset_info": "/public/Assets",
-    "get_tradable_asset_pairs": "/public/AssetPairs",
-    "get_ticker_information": "/public/Ticker",
-    "get_ohlc_data": "/public/OHLC",
-    "get_order_book": "/public/Depth",
-    "get_recent_trades": "/public/Trades",
-    "get_recent_spreads": "/public/Spread"
-}
 
 def start_program():
     print(f"\n-----------------------\n  Available Endpoints  \n-----------------------")
@@ -45,23 +27,23 @@ def validate_user_input(user_input):
 def call_endpoint(request):
     endpoint = public_endpoints[request]
     if request == "get_server_time":
-        get_server_time(endpoint)
+        get_server_time.get_server_time(endpoint)
     elif request == "get_system_status":
-        get_system_status(endpoint)
+        get_system_status.get_system_status(endpoint)
     elif request == "get_asset_info":
-        get_asset_info(endpoint)
+        get_asset_info.get_asset_info(endpoint)
     elif request == "get_tradable_asset_pairs":
-        get_tradable_asset_pairs(endpoint)
+        get_tradable_asset_pairs.get_tradable_asset_pairs(endpoint)
     elif request == "get_ticker_information":
-        get_ticker_information(endpoint)
+        get_ticker_information.get_ticker_information(endpoint)
     elif request == "get_ohlc_data":
-        get_ohlc_data(endpoint)
+        get_ohlc_data.get_ohlc_data(endpoint)
     elif request == "get_order_book":
-        get_order_book(endpoint)
+        get_order_book.get_order_book(endpoint)
     elif request == "get_recent_trades":
-        get_recent_trades(endpoint)
+        get_recent_trades.get_recent_trades(endpoint)
     elif request == "get_recent_spreads":
-        get_recent_spreads(endpoint)
+        get_recent_spreads.get_recent_spreads(endpoint)
 
 def get_response(url):
     print("\nRequest url:" , url)

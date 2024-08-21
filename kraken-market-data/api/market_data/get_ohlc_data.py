@@ -1,5 +1,5 @@
-from main import BASE_URL
-from main import get_response
+from config import BASE_URL
+
 
 def get_ohlc_data(endpoint):
     print("\nINFO: GET OHLC information. The last entry in the OHLC array is for the current, not-yet-committed frame and will always be present, regardless of the value of since.")
@@ -35,4 +35,5 @@ def get_ohlc_data(endpoint):
     elif pair != "" and interval != "" and since != "":
         url = f"{BASE_URL}{endpoint}?pair={pair}&interval={interval}&since={since}"
     
+    from main import get_response
     get_response(url)

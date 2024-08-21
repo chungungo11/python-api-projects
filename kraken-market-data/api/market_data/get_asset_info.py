@@ -1,5 +1,5 @@
-from main import BASE_URL
-from main import get_response
+from config import BASE_URL
+
 
 def get_asset_info(endpoint):
     print("\nINFO: Get information about the assets that are available for deposit, withdrawal, trading and earn.")
@@ -13,5 +13,6 @@ def get_asset_info(endpoint):
         url = BASE_URL + endpoint
     else:
         url = f"{BASE_URL}{endpoint}?asset={asset}"
-        
+
+    from main import get_response    
     get_response(url)
