@@ -74,12 +74,12 @@ def prompt_save(response):
     if save.lower() == "y":
         with open('response.json', 'w') as outfile:
             json.dump(response.json(), outfile, indent=2)
-        print('Data is saved to response.json')
+        print('\n*** Data is saved to response.json ***')
     elif save.lower() == "n":
         return
     else:
         print("\nYour input was invalid. Please type 'y' to save or 'n' to skip.")
-        return prompt_save()
+        return prompt_save(response)
     
 
 def prompt_restart():
