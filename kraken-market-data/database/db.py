@@ -10,8 +10,6 @@ user = os.getenv("user")
 password = os.getenv("password")
 db = os.getenv("db")
 
-print(host, user, password, db)
-
 
 connection = pymysql.connect(
     host=host,
