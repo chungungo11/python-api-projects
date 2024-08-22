@@ -1,4 +1,4 @@
-from config import *
+from settings import *
 from mysql.secret import connection
 import json
 import requests

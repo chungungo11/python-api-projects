@@ -1,4 +1,4 @@
-from config import BASE_URL
+from settings import BASE_URL
 
 
 def get_recent_spreads(endpoint):

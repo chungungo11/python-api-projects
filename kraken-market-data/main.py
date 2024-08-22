@@ -1,7 +1,8 @@
 import json
+import pandas as pd
 import requests
 from api.market_data import *
-from config import *
+from settings import *
 
 
 def start_program():
@@ -55,7 +56,7 @@ def get_response(url):
     response = requests.request("GET", url, headers=headers, data=payload)
     if response.json()["error"] == []:
         print_response(response)
-        prompt_save(response)
+        save_to_json(response)
         prompt_restart()
     else:   
         print_response(response)
@@ -68,18 +69,10 @@ def print_response(response):
     print(f"\n------------\n  Response  \n------------\n{pretty_response}")
 
 
-def prompt_save(response):
-    print("\nWould you like to save this response? (y/n)")
-    save = input("> ")
-    if save.lower() == "y":
-        with open('response.json', 'w') as outfile:
-            json.dump(response.json(), outfile, indent=2)
-        print('\n*** Data is saved to response.json ***')
-    elif save.lower() == "n":
-        return
-    else:
-        print("\nYour input was invalid. Please type 'y' to save or 'n' to skip.")
-        return prompt_save(response)
+def save_to_json(response):
+    with open('response.json', 'w') as outfile:
+        json.dump(response.json(), outfile, indent=2)
+    print('\n*** Data is saved to response.json ***')
     
 
 def prompt_restart():
