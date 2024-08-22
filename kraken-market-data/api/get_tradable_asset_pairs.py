@@ -2,6 +2,9 @@ from settings import BASE_URL
 
 
 def get_tradable_asset_pairs(endpoint):
+    title = 'Tradable Asset Pairs'
+    dashes = (len(title) + 4) * '-'
+    print(f"\n{dashes}\n  {title}  \n{dashes}")
     print("\nINFO: Get tradable asset pairs.")
     print("\nOPTIONAL: Asset pair(s) to get data for. Default: all available assets.")
     print("\nEXAMPLE: 'BTC/USD,ETH/BTC'")

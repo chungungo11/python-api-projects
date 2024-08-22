@@ -2,6 +2,9 @@ from settings import BASE_URL
 
 
 def get_order_book(endpoint):
+    title = 'Order Book'
+    dashes = (len(title) + 4) * '-'
+    print(f"\n{dashes}\n  {title}  \n{dashes}")
     print("\nINFO: Returns the Order Book.")
     print("\nREQUIRED: Asset pair to get data for.")
     print("\nEXAMPLE: 'XBTUSD'")

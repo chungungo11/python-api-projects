@@ -2,6 +2,9 @@ from settings import BASE_URL
 
 
 def get_recent_trades(endpoint):
+    title = 'Recent Trades'
+    dashes = (len(title) + 4) * '-'
+    print(f"\n{dashes}\n  {title}  \n{dashes}")
     print("\nINFO: Returns the last 1000 trades by default.")
     print("\nREQUIRED: Asset pair to get data for.")
     print("\nEXAMPLE: 'XBTUSD'")

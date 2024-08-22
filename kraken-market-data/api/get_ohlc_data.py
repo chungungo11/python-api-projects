@@ -2,6 +2,9 @@ from settings import BASE_URL
 
 
 def get_ohlc_data(endpoint):
+    title = 'OHLC Data'
+    dashes = (len(title) + 4) * '-'
+    print(f"\n{dashes}\n  {title}  \n{dashes}")
     print("\nINFO: GET OHLC information. The last entry in the OHLC array is for the current, not-yet-committed frame and will always be present, regardless of the value of since.")
     print("\nREQUIRED: Asset pair to get data for.")
     print("\nEXAMPLE: 'XBTUSD'")

@@ -1,41 +1,15 @@
-from settings import *
-from mysql.secret import connection
-import json
-import requests
+import pymysql
+from secret import *
 
 
-endpoint = "/public/Assets"
-
-
-def get_asset_info(endpoint):
-    print("\nINFO: Get information about the assets that are available for deposit, withdrawal, trading and earn.")
-    print("\nOPTIONAL: Comma delimited list of assets to get info on. Default: all available assets.")
-    print("EXAMPLE: 'BTC,ETH'")
-    asset = input("> ")
-
-    if asset == "":
-        url = BASE_URL + endpoint
-    else:
-        url = f"{BASE_URL}{endpoint}?asset={asset}"
-   
-    get_response(url)
-
-
-def get_response(url):
-    print("\nRequest url:" , url)
-    response = requests.request("GET", url, headers=headers, data=payload)
-    # check if error is returnedß
-    if response.json()["error"] != []:
-        print_response(response)
-        print("\nQuery is invalid. Please check for any typos and try again.")
-    else:   
-        print_response(response)
-        extract_data(response)
-
-
-def print_response(response):
-    pretty_response = json.dumps(response.json(), indent=2)
-    print(f"\n------------\n  Response  \n------------\n{pretty_response}")
+connection = pymysql.connect(
+    host=host,
+    user=user,
+    password=password,
+    db=db,
+    charset='utf8mb4',
+    cursorclass=pymysql.cursors.DictCursor
+)
 
 
 def extract_data(response):
@@ -75,5 +49,3 @@ def save_to_db(name, aclass, altname, decimals, display_decimals, collateral_val
         print("Record inserted successfully")
     finally:
         connection.close()
-
-get_asset_info(endpoint)

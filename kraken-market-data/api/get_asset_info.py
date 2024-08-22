@@ -2,6 +2,9 @@ from settings import BASE_URL
 
 
 def get_asset_info(endpoint):
+    title = 'Asset Info'
+    dashes = (len(title) + 4) * '-'
+    print(f"\n{dashes}\n  {title}  \n{dashes}")
     print("\nINFO: Get information about the assets that are available for deposit, withdrawal, trading and earn.")
     print("\nOPTIONAL: Comma delimited list of assets to get info on. Default: all available assets.")
     print("\nEXAMPLE: 'BTC,ETH'")

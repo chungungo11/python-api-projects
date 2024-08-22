@@ -2,6 +2,9 @@ from settings import BASE_URL
 
 
 def get_recent_spreads(endpoint):
+    title = 'Recent Spreads'
+    dashes = (len(title) + 4) * '-'
+    print(f"\n{dashes}\n  {title}  \n{dashes}")
     print("\nINFO: Returns the last ~200 top-of-book spreads for a given pair.")
     print("\nREQUIRED: Asset pair to get data for.")
     print("\nEXAMPLE: 'XBTUSD'")

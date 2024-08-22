@@ -5,22 +5,36 @@ from api import *
 from settings import *
 
 
-endpoint = ''
+def main():
+    print_available_requests()
+    user_input = get_user_input()
+    
+    while validate_user_input(user_input) != True:
+        user_input = get_user_input()
+    else:
+        request = user_input
+        url = get_endpoint_url(request)
+        response = get_response(url)
+    
+        while validate_response(response) != True:
+            url = get_endpoint_url(request)
+            response = get_response(url)
+        else:
+            print_response(response)
+            save_to_json(request, response)
+            prompt_restart()
 
 
-def start_program():
+def print_available_requests():
     print(f"\n----------------------\n  Available Requests  \n----------------------")
     for request in public_endpoints:
         print(f"- {request}")
-    get_user_input()
 
 
 def get_user_input():
     print("\nEnter the endpoint you would like to call (e.g. 'get_asset_info'):")
     user_input = input("> ")
-    if validate_user_input(user_input):
-        request = user_input
-        get_endpoint_url(request)
+    return user_input
 
 
 def validate_user_input(user_input):
@@ -28,7 +42,7 @@ def validate_user_input(user_input):
         return True
     else:
         print("\nYour input was invalid. Please check for any typos and try again.")
-        get_user_input()
+        return False
 
 
 def get_endpoint_url(request):
@@ -51,20 +65,22 @@ def get_endpoint_url(request):
         url = get_recent_trades.get_recent_trades(endpoint)
     elif request == "get_recent_spreads":
         url = get_recent_spreads.get_recent_spreads(endpoint)
-    get_response(url)
+    return url
 
 
 def get_response(url):
     print("\nRequest url:" , url)
     response = requests.request("GET", url, headers=headers, data=payload)
+    return response
+    
+    
+def validate_response(response):    
     if response.json()["error"] == []:
-        print_response(response)
-        save_to_json(response)
-        prompt_restart()
+        return True
     else:   
         print_response(response)
         print("\nQuery is invalid. Please check for any typos and try again.")
-        get_user_input()
+        return False
 
 
 def print_response(response):
@@ -72,18 +88,18 @@ def print_response(response):
     print(f"\n------------\n  Response  \n------------\n{pretty_response}")
 
 
-def save_to_json(endpoint, response):
+def save_to_json(request, response):
     timestamp = int(time.time())
-    with open(f'output/{timestamp}_response.json', 'w') as outfile:
+    with open(f'output/{timestamp}_{request}_response.json', 'w') as outfile:
         json.dump(response.json(), outfile, indent=2)
-    print(f"\n*** Data is saved to 'output/{timestamp}_response.json' ***")
+    print(f"\n*** Data is saved to 'output/{timestamp}_{request}_response.json' ***")
     
 
 def prompt_restart():
     print("\nWould you like to call another endpoint? (y/n)")
     restart = input("> ")
     if restart.lower() == "y":
-        start_program()
+        main()
     elif restart.lower() == "n":
         exit(0)
     else:
@@ -92,4 +108,4 @@ def prompt_restart():
 
 
 if __name__ == "__main__":
-    start_program()
+    main()

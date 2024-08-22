@@ -2,6 +2,9 @@ from settings import BASE_URL
 
 
 def get_ticker_information(endpoint):
+    title = 'Ticker Information'
+    dashes = (len(title) + 4) * '-'
+    print(f"\n{dashes}\n  {title}  \n{dashes}")
     print("\nGet ticker information for all or requested markets. To clarify usage, note that:")
     print("- Today's prices start at midnight UTC")
     print("- Leaving the pair parameter blank will return tickers for all tradeable assets on Kraken")
