@@ -1,5 +1,16 @@
+from dotenv import load_dotenv
+import os
 import pymysql
-from secret import *
+
+
+load_dotenv()
+
+host = os.getenv("host")
+user = os.getenv("user")
+password = os.getenv("password")
+db = os.getenv("db")
+
+print(host, user, password, db)
 
 
 connection = pymysql.connect(
