@@ -1,5 +1,5 @@
 from config import *
-from secret import mysql_connection
+# from secret import mysql_connection
 import json
 import requests
 
@@ -40,15 +40,19 @@ def print_response(response):
 
 def extract_data(response):
     data = response.json()
-    result = data['result']['BTC']
-    aclass = result.get('aclass')
-    altname = result.get('altname')
-    decimals = result.get('decimals')
-    display_decimals = result.get('display_decimals')
-    collateral_value = result.get('collateral_value')
-    status = result.get('status')
-    print(result)
-    print(aclass, altname, decimals, display_decimals, collateral_value, status)
+    result = data['result']
+    name = list(result)[0]
+    asset_info = data['result'][name]
+    aclass = asset_info.get('aclass')
+    altname = asset_info.get('altname')
+    decimals = asset_info.get('decimals')
+    display_decimals = asset_info.get('display_decimals')
+    collateral_value = asset_info.get('collateral_value')
+    status = asset_info.get('status')
+    print("Result:", result)
+    print("Asset:", name)
+    print("Asset Info:", asset_info)
+    print(name, aclass, altname, decimals, display_decimals, collateral_value, status)
 
 # try:
 #     with mysql_connection.cursor() as cursor:
