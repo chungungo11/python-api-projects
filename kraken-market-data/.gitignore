@@ -1,4 +1,4 @@
 .python-version
 __pycache__
-response.json
+output
 secret.py

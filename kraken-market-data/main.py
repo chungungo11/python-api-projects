@@ -1,8 +1,11 @@
 import json
-import pandas as pd
 import requests
-from api.market_data import *
+import time
+from api import *
 from settings import *
+
+
+endpoint = ''
 
 
 def start_program():
@@ -69,10 +72,11 @@ def print_response(response):
     print(f"\n------------\n  Response  \n------------\n{pretty_response}")
 
 
-def save_to_json(response):
-    with open('response.json', 'w') as outfile:
+def save_to_json(endpoint, response):
+    timestamp = int(time.time())
+    with open(f'output/{timestamp}_response.json', 'w') as outfile:
         json.dump(response.json(), outfile, indent=2)
-    print('\n*** Data is saved to response.json ***')
+    print(f"\n*** Data is saved to 'output/{timestamp}_response.json' ***")
     
 
 def prompt_restart():
