@@ -4,6 +4,9 @@ import time
 from api import *
 from settings import *
 
+# initialize colorama
+init()
+
 
 def main():
     print_available_requests()
@@ -26,13 +29,13 @@ def main():
 
 
 def print_available_requests():
-    print(f"\n----------------------\n  Available Requests  \n----------------------")
+    print(f"\n{Fore.GREEN}----------------------\n  Available Requests  \n----------------------{Style.RESET_ALL}")
     for request in public_endpoints:
         print(f"- {request}")
 
 
 def get_user_input():
-    print("\nEnter the endpoint you would like to call (e.g. 'get_asset_info'):")
+    print(f"\n{Fore.YELLOW}Enter the endpoint you would like to call (e.g. 'get_asset_info'):{Style.RESET_ALL}")
     user_input = input("> ")
     return user_input
 
@@ -41,7 +44,7 @@ def validate_user_input(user_input):
     if user_input.lower() in public_endpoints:
         return True
     else:
-        print("\nYour input was invalid. Please check for any typos and try again.")
+        print(f"\n{Fore.RED}Your input was invalid. Please check for any typos and try again.{Style.RESET_ALL}")
         return False
 
 
@@ -69,7 +72,7 @@ def get_endpoint_url(request):
 
 
 def get_response(url):
-    print("\nRequest url:" , url)
+    print(f"\n{Fore.CYAN}Request url:{Style.RESET_ALL}" , url)
     response = requests.request("GET", url, headers=headers, data=payload)
     return response
     
@@ -79,31 +82,31 @@ def validate_response(response):
         return True
     else:   
         print_response(response)
-        print("\nQuery is invalid. Please check for any typos and try again.")
+        print(f"\n{Fore.RED}Query is invalid. Please check for any typos and try again.{Style.RESET_ALL}")
         return False
 
 
 def print_response(response):
     pretty_response = json.dumps(response.json(), indent=2)
-    print(f"\n------------\n  Response  \n------------\n{pretty_response}")
+    print(f"{Fore.GREEN}\n------------\n  Response  \n------------\n{Style.RESET_ALL}\n{pretty_response}")
 
 
 def save_to_json(request, response):
     timestamp = int(time.time())
     with open(f'output/{timestamp}_{request}_response.json', 'w') as outfile:
         json.dump(response.json(), outfile, indent=2)
-    print(f"\n*** Data is saved to 'output/{timestamp}_{request}_response.json' ***")
+    print(f"\n{Fore.GREEN}*** Data is saved to 'output/{timestamp}_{request}_response.json' ***{Style.RESET_ALL}")
     
 
 def prompt_restart():
-    print("\nWould you like to call another endpoint? (y/n)")
+    print(f"\n{Fore.YELLOW}Would you like to call another endpoint? (y/n){Style.RESET_ALL}")
     restart = input("> ")
     if restart.lower() == "y":
         main()
     elif restart.lower() == "n":
         exit(0)
     else:
-        print("\nYour input was invalid. Please type 'y' to restart or 'n' to exit.")
+        print(f"\n{Fore.RED}Your input was invalid. Please type 'y' to restart or 'n' to exit.{Style.RESET_ALL}")
         return prompt_restart()
 
 

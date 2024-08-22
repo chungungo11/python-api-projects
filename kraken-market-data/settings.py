@@ -1,3 +1,6 @@
+from colorama import init, Fore, Style
+
+
 BASE_URL = "https://api.kraken.com/0"
 
 payload = {}

@@ -1,12 +1,13 @@
-from settings import BASE_URL
+from settings import *
 
 
 def get_ohlc_data(endpoint):
     title = 'OHLC Data'
     dashes = (len(title) + 4) * '-'
-    print(f"\n{dashes}\n  {title}  \n{dashes}")
+    print(f"\n{Fore.GREEN}{dashes}\n  {title}  \n{dashes}{Style.RESET_ALL}")
+    
     print("\nINFO: GET OHLC information. The last entry in the OHLC array is for the current, not-yet-committed frame and will always be present, regardless of the value of since.")
-    print("\nREQUIRED: Asset pair to get data for.")
+    print(f"\n{Fore.YELLOW}REQUIRED: Asset pair to get data for.{Style.RESET_ALL}")
     print("\nEXAMPLE: 'XBTUSD'")
     pair = input("> ")
     if pair == "":
@@ -14,14 +15,14 @@ def get_ohlc_data(endpoint):
         get_ohlc_data(endpoint)
 
     interval_values = [1, 5, 15, 30, 60, 240, 1440, 10080, 21600]
-    print("\nOPTIONAL: Time frame interval in minutes. Default value: '1'.")
+    print(f"\n{Fore.YELLOW}OPTIONAL: Time frame interval in minutes. Default value: '1'.{Style.RESET_ALL}")
     print("\nPOSSIBLE VALUES: [1, 5, 15, 30, 60, 240, 1440, 10080, 21600]")
     interval = input("> ")
     if int(interval) not in interval_values:
-        print("\nInterval value invalid. Please enter a valid interval.")
+        print(f"\n{Fore.RED}Interval value invalid. Please enter a valid interval.{Style.RESET_ALL}")
         get_ohlc_data(endpoint)
 
-    print("\nOPTIONAL: Return up to 720 OHLC data points since given timestamp.")
+    print(f"\n{Fore.YELLOW}OPTIONAL: Return up to 720 OHLC data points since given timestamp.{Style.RESET_ALL}")
     print("\nEXAMPLE: '1548111600'")
     since = input("> ")
 
