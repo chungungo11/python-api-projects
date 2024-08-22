@@ -1,19 +1,10 @@
 from config import *
+from secret import mysql_connection
 import json
-import pymysql
 import requests
 
 
 endpoint = "/public/Assets"
-
-conn = pymysql.connect(
-    host='localhost',
-    user='root',
-    password='4dABxZCExXaAKjNiBaez',
-    db='kraken_market_data',
-    charset='utf8mb4',
-    cursorclass=pymysql.cursors.DictCursor
-)
 
 
 def get_asset_info(endpoint):
@@ -60,16 +51,16 @@ def extract_data(response):
     print(aclass, altname, decimals, display_decimals, collateral_value, status)
 
 # try:
-#     with conn.cursor() as cursor:
+#     with mysql_connection.cursor() as cursor:
 #         # Create a new record
 #         sql = "INSERT INTO `assets` (`id`, `name`) VALUES (%s, %s)"
 #         cursor.execute(sql, ('0', 'BTC'))
 
 #     # Commit changes
-#     conn.commit()
+#     mysql_connection.commit()
 
 #     print("Record inserted successfully")
 # finally:
-#     conn.close()
+#     mysql_connection.close()
 
 get_asset_info(endpoint)
