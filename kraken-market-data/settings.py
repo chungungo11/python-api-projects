@@ -4,9 +4,7 @@ from colorama import init, Fore, Style
 BASE_URL = "https://api.kraken.com/0"
 
 payload = {}
-headers = {
-  'Accept': 'application/json'
-}
+headers = {"Accept": "application/json"}
 
 public_endpoints = {
     "get_server_time": "/public/Time",
@@ -17,5 +15,5 @@ public_endpoints = {
     "get_ohlc_data": "/public/OHLC",
     "get_order_book": "/public/Depth",
     "get_recent_trades": "/public/Trades",
-    "get_recent_spreads": "/public/Spread"
+    "get_recent_spreads": "/public/Spread",
 }
