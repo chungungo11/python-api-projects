@@ -21,13 +21,13 @@ connection = pymysql.connect(
 )
 
 
-def extract_data(response):
+def extract_asset_data(response):
     data = response.json()
     result = data["result"]
     # retrieve asset name
-    name = list(result)[0]
+    asset_name = list(result)[0]
     # retrieve asset info
-    asset_info = data["result"][name]
+    asset_info = data["result"][asset_name]
     aclass = asset_info.get("aclass")
     altname = asset_info.get("altname")
     decimals = asset_info.get("decimals")
@@ -39,21 +39,26 @@ def extract_data(response):
         collateral_value = 0
     status = asset_info.get("status")
     print("Result:", result)
-    print("Asset:", name)
+    print("Asset:", asset_name)
     print("Asset Info:", asset_info)
-    print(name, aclass, altname, decimals, display_decimals, collateral_value, status)
-    save_to_db(
-        name, aclass, altname, decimals, display_decimals, collateral_value, status
-    )
+    asset_info_list = [
+        asset_name,
+        aclass,
+        altname,
+        decimals,
+        display_decimals,
+        collateral_value,
+        status,
+    ]
+    print(asset_info_list)
+    save_assets_to_db(asset_info_list)
 
 
-def save_to_db(
-    name, aclass, altname, decimals, display_decimals, collateral_value, status
-):
+def save_assets_to_db(asset_info_list):
     try:
         with connection.cursor() as cursor:
             # Create a new record
-            sql = "INSERT INTO `asset_info` (`name`, `aclass`, `altname`, `decimals`, `display_decimals`, `collateral_value`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO `asset_info` (`asset_name`, `aclass`, `altname`, `decimals`, `display_decimals`, `collateral_value`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             cursor.execute(
                 sql,
                 (
@@ -73,3 +78,64 @@ def save_to_db(
         print("Record inserted successfully")
     finally:
         connection.close()
+
+
+def extract_pair_data(response):
+    data = response.json()
+    result = data["result"]
+    # retrieve pair name
+    pair_name = list(result)[0]
+    # retrieve pair info
+    pair_info = data["result"][pair_name]
+    altname = pair_info.get("altname")
+    wsname = pair_info.get("wsname")
+    aclass_base = pair_info.get("aclass_base")
+    base = pair_info.get("base")
+    aclass_quote = pair_info.get("aclass_quote")
+    quote = pair_info.get("quote")
+    lot = pair_info.get("lot")
+    cost_decimals = pair_info.get("cost_decimals")
+    pair_decimals = pair_info.get("pair_decimals")
+    lot_decimals = pair_info.get("lot_decimals")
+    lot_multiplier = pair_info.get("lot_multiplier")
+    fee_volume_currency = pair_info.get("fee_volume_currency")
+    margin_call = pair_info.get("margin_call")
+    margin_stop = pair_info.get("margin_stop")
+    ordermin = pair_info.get("ordermin")
+    costmin = pair_info.get("costmin")
+    tick_size = pair_info.get("tick_size")
+    status = pair_info.get("status")
+    long_position_limit = pair_info.get("long_position_limit")
+    short_position_limit = pair_info.get("short_position_limit")
+    print("Result:", result)
+    print("Pair:", pair_name)
+    print("Pair Info:", pair_info)
+    pair_info_list = [
+        pair_name,
+        altname,
+        wsname,
+        aclass_base,
+        base,
+        aclass_quote,
+        quote,
+        lot,
+        cost_decimals,
+        pair_decimals,
+        lot_decimals,
+        lot_multiplier,
+        fee_volume_currency,
+        margin_call,
+        margin_stop,
+        ordermin,
+        costmin,
+        tick_size,
+        status,
+        long_position_limit,
+        short_position_limit,
+    ]
+    print(pair_info_list)
+    save_pairs_to_db(pair_info_list)
+
+
+def save_pairs_to_db(pair_info_list):
+    pass
