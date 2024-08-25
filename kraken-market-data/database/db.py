@@ -51,7 +51,7 @@ def extract_asset_data(response):
         status,
     ]
     print(asset_info_list)
-    save_assets_to_db(asset_info_list)
+    # save_assets_to_db(asset_info_list)
 
 
 def save_assets_to_db(asset_info_list):

@@ -103,10 +103,10 @@ def print_response(response):
 
 def save_to_json(request, response):
     timestamp = int(time.time())
-    with open(f"output/{timestamp}_{request}_response.json", "w") as outfile:
+    with open(f"output/{timestamp}-{request}-response.json", "w") as outfile:
         json.dump(response.json(), outfile, indent=2)
     print(
-        f"\n{Fore.GREEN}*** Data is saved to 'output/{timestamp}_{request}_response.json' ***{Style.RESET_ALL}"
+        f"\n{Fore.GREEN}*** Data is saved to 'output/{timestamp}-{request}-response.json' ***{Style.RESET_ALL}"
     )
 
 
