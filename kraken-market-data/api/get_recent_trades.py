@@ -27,11 +27,11 @@ def get_recent_trades(endpoint):
     )
     print("\nPOSSIBLE VALUES: >= 1 and <= 1000")
     count = input("> ")
-    if int(count) not in range(1, 1001):
+    while count != "" and int(count) not in range(1, 1001):
         print(
             f"\n{Fore.RED}Value is invalid. Please enter a valid number of trades.{Style.RESET_ALL}"
         )
-        get_recent_trades(endpoint)
+        count = input("> ")
 
     # pair
     if pair != "" and since == "" and count == "":
