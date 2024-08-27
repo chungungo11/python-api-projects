@@ -10,11 +10,11 @@ def get_recent_spreads(endpoint):
     print(f"\n{Fore.YELLOW}REQUIRED: Asset pair to get data for.{Style.RESET_ALL}")
     print("\nEXAMPLE: 'XBTUSD'")
     pair = input("> ")
-    if pair == "":
+    while pair == "":
         print(
             f"\n{Fore.RED}Asset pair is required. Please enter an asset pair.{Style.RESET_ALL}"
         )
-        get_recent_spreads(endpoint)
+        pair = input("> ")
 
     print(
         f"\n{Fore.YELLOW}OPTIONAL: Returns spread data since given timestamp. Intended for incremental updates within available dataset (does not contain all historical spreads).{Style.RESET_ALL}"
