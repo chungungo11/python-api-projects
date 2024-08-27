@@ -1,7 +1,9 @@
 import json
+import pandas as pd
 import requests
 import time
 from api import *
+from database import db
 from settings import *
 
 # initialize colorama
@@ -25,6 +27,9 @@ def main():
         else:
             print_response(response)
             save_to_json(request, response)
+            if request == "get_asset_info":
+                db.extract_asset_data(response)
+                save_to_csv(db.asset_data)
             prompt_restart()
 
 
@@ -108,6 +113,14 @@ def save_to_json(request, response):
     print(
         f"\n{Fore.GREEN}*** Data is saved to 'output/{timestamp}-{request}-response.json' ***{Style.RESET_ALL}"
     )
+
+
+def save_to_csv(data):
+    timestamp = int(time.time())
+    df = pd.DataFrame(data)
+    csv_file_path = f"output/{timestamp}-asset_info.csv"
+    df.to_csv(csv_file_path, index=False)
+    print(f"\n{Fore.GREEN}*** Data is saved to '{csv_file_path}' ***{Style.RESET_ALL}")
 
 
 def prompt_restart():
