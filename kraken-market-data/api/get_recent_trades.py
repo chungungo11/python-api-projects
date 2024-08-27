@@ -10,11 +10,11 @@ def get_recent_trades(endpoint):
     print(f"\n{Fore.YELLOW}REQUIRED: Asset pair to get data for.{Style.RESET_ALL}")
     print("\nEXAMPLE: 'XBTUSD'")
     pair = input("> ")
-    if pair == "":
+    while pair == "":
         print(
             f"\n{Fore.RED}Asset pair is required. Please enter an asset pair.{Style.RESET_ALL}"
         )
-        get_recent_trades(endpoint)
+        pair = input("> ")
 
     print(
         f"\n{Fore.YELLOW}OPTIONAL: Return trade data since given timestamp.{Style.RESET_ALL}"
