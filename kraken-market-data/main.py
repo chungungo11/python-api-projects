@@ -10,6 +10,7 @@ from settings import *
 init()
 
 
+# main program logic
 def main():
     print_available_requests()
     user_input = get_user_input()
@@ -33,6 +34,7 @@ def main():
             prompt_restart()
 
 
+# print all available public market data requests
 def print_available_requests():
     print(
         f"\n{Fore.GREEN}----------------------\n  Available Requests  \n----------------------{Style.RESET_ALL}"
@@ -41,6 +43,7 @@ def print_available_requests():
         print(f"- {request}")
 
 
+# prompt user input for api request
 def get_user_input():
     print(
         f"\n{Fore.YELLOW}Enter the endpoint you would like to call (e.g. 'get_asset_info'):{Style.RESET_ALL}"
@@ -49,6 +52,7 @@ def get_user_input():
     return user_input
 
 
+# check if user input is a valid api request
 def validate_user_input(user_input):
     if user_input.lower() in public_endpoints:
         return True
@@ -59,6 +63,7 @@ def validate_user_input(user_input):
         return False
 
 
+# get full endpoint url based on api request
 def get_endpoint_url(request):
     endpoint = public_endpoints[request]
     if request == "get_server_time":
@@ -82,12 +87,14 @@ def get_endpoint_url(request):
     return url
 
 
+# get response from api request
 def get_response(url):
     print(f"\n{Fore.CYAN}Request url:{Style.RESET_ALL}", url)
     response = requests.request("GET", url, headers=headers, data=payload)
     return response
 
 
+# validate response from api request
 def validate_response(response):
     if response.json()["error"] == []:
         return True
@@ -99,6 +106,7 @@ def validate_response(response):
         return False
 
 
+# pretty print api response
 def print_response(response):
     pretty_response = json.dumps(response.json(), indent=2)
     print(
@@ -106,6 +114,7 @@ def print_response(response):
     )
 
 
+# save api response to json
 def save_to_json(request, response):
     timestamp = int(time.time())
     with open(f"output/{timestamp}-{request}-response.json", "w") as outfile:
@@ -115,6 +124,7 @@ def save_to_json(request, response):
     )
 
 
+# save api response to csv
 def save_to_csv(data):
     timestamp = int(time.time())
     df = pd.DataFrame(data)
@@ -123,6 +133,7 @@ def save_to_csv(data):
     print(f"\n{Fore.GREEN}*** Data is saved to '{csv_file_path}' ***{Style.RESET_ALL}")
 
 
+# prompt user to call another endpoint
 def prompt_restart():
     print(
         f"\n{Fore.YELLOW}Would you like to call another endpoint? (y/n){Style.RESET_ALL}"
