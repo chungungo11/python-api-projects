@@ -1,11 +1,14 @@
+# colors in terminal
 from colorama import init, Fore, Style
 
 
 BASE_URL = "https://api.kraken.com/0"
 
+# payload and headers sent in a request
 payload = {}
 headers = {"Accept": "application/json"}
 
+# all market data endpoints
 public_endpoints = {
     "get_server_time": "/public/Time",
     "get_system_status": "/public/SystemStatus",
